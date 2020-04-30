@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SuperDemo</string>
     <string name="notification_name">Notification</string>
+    <string name="custom_name">Custom</string>
 </resources>

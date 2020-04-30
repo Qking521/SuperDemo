@@ -16,6 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.NotificationActivity"
+            android:label="@string/notification_name"/>
     </application>
 
 </manifest>

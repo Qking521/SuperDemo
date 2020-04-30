@@ -17,6 +17,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        mListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mActivityInfoList));
+        mListView.setAdapter(new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                mActivityInfoList.stream()
+                        .map(x -> x.labelRes > 0 ? x.loadLabel(getPackageManager()) : x.name)
+                        .collect(Collectors.toList())));
     }
 }

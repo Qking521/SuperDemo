@@ -39,4 +39,12 @@ public class CustomViewActivity extends BaseActivity {
         }
     }
 
+    public void setVisible(View view) {
+        if (view.getVisibility() == View.VISIBLE) {
+            view.setVisibility(View.GONE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:text="floatView"
-        android:onClick="floatView"
         android:clickable="true"
+        android:gravity="center"
+        android:onClick="floatView"
         android:tag="start"
+        android:text="floatView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/target1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:onClick="setVisible"
+            android:text="目标1" />
+
+        <TextView
+            android:id="@+id/target2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:onClick="setVisible"
+            android:text="目标2" />
+
+        <com.king.superdemo.custom.DividerView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            app:follow="target1|target2"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -46,6 +46,10 @@
             android:background="@color/colorAccent"
             app:follow="target1|target2"/>
 
+        <com.king.superdemo.custom.BatteryChargingView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </LinearLayout>

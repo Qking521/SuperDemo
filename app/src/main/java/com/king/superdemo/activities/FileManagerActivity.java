@@ -19,12 +19,15 @@ import androidx.annotation.NonNull;
 
 import com.king.superdemo.BaseActivity;
 import com.king.superdemo.R;
+import com.king.superdemo.utils.PermissionUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 public class FileManagerActivity extends BaseActivity {
 
@@ -47,26 +50,14 @@ public class FileManagerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_manager);
         mFileListView = (ListView)findViewById(R.id.file_listview);
-        if (checkCallingOrSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (isPermissionGranted(this, READ_EXTERNAL_STORAGE)) {
             fileManager();
         } else {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                fileManager();
-            }else  if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Toast.makeText(this, "storage should be granted", Toast.LENGTH_SHORT).show();
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            } else {
-                Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
-            }
+            requestPermission(this, new String[]{READ_EXTERNAL_STORAGE},
+                    new PermissionUtil.PermissionCallback[]{x -> {
+                        Log.i("wq", "onCreate: x="+ x);
+                        if (x) fileManager();
+                    }});
         }
     }
 

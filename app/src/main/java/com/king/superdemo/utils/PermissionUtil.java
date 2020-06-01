@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
@@ -76,7 +77,43 @@ public class PermissionUtil {
     }
 
     private static String getRationale(String permission) {
-        return "null";
+        switch (permission) {
+            case Manifest.permission.READ_CALENDAR:
+            case Manifest.permission.WRITE_CALENDAR:
+                return "CALENDAR";
+            case Manifest.permission.CAMERA:
+                return "CAMERA";
+            case Manifest.permission.READ_CONTACTS:
+            case Manifest.permission.WRITE_CONTACTS:
+            case Manifest.permission.GET_ACCOUNTS:
+                return "CONTACTS";
+            case Manifest.permission.ACCESS_FINE_LOCATION:
+            case Manifest.permission.ACCESS_COARSE_LOCATION:
+                return "LOCATION";
+            case Manifest.permission.RECORD_AUDIO:
+                return "MICROPHONE";
+            case Manifest.permission.READ_PHONE_STATE:
+            case Manifest.permission.CALL_PHONE:
+            case Manifest.permission.READ_CALL_LOG:
+            case Manifest.permission.WRITE_CALL_LOG:
+            case Manifest.permission.ADD_VOICEMAIL:
+            case Manifest.permission.USE_SIP:
+            case Manifest.permission.PROCESS_OUTGOING_CALLS:
+                return "PHONE";
+            case Manifest.permission.BODY_SENSORS:
+                return "SENSORS";
+            case Manifest.permission.SEND_SMS:
+            case Manifest.permission.RECEIVE_SMS:
+            case Manifest.permission.READ_SMS:
+            case Manifest.permission.RECEIVE_WAP_PUSH:
+            case Manifest.permission.RECEIVE_MMS:
+                return "SMS";
+            case Manifest.permission.READ_EXTERNAL_STORAGE:
+            case Manifest.permission.WRITE_EXTERNAL_STORAGE:
+                return "STORAGE";
+            default:
+                return null;
+        }
     }
 
     public static void shouldShowRequestPermissionRationale(final Activity activity, String[] permissions){
@@ -87,13 +124,17 @@ public class PermissionUtil {
 
     public static void shouldShowRequestPermissionRationale(final Activity activity, String permission, String rationale){
         if (activity.shouldShowRequestPermissionRationale(permission)) {
-            ShowRequestPermissionRationaleDialog(activity, rationale,
+            ShowRequestPermissionRationaleDialog(activity, "rationale", rationale,
                     (dialog, which) -> requestPermission(activity, new String[]{permission}),
-                    (dialog, which) -> showDialog(activity));
+                   null);
+        } else {
+            if (!isPermissionGranted(activity, permission)) {
+                showDialog(activity, "goto settings", "need open form settings", (dialog, which) -> gotoSettings(activity), null);
+            }
         }
     }
 
-    public static void showDialog(Activity activity) {
+    public static void gotoSettings(Activity activity) {
         final Intent i = new Intent();
         i.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         i.addCategory(Intent.CATEGORY_DEFAULT);
@@ -152,11 +193,15 @@ public class PermissionUtil {
         }
     }
 
-    private static void ShowRequestPermissionRationaleDialog(Context context, String msg,
+    private static void ShowRequestPermissionRationaleDialog(Context context, String title, String msg,
                                                              DialogInterface.OnClickListener okClickListener,
                                                              DialogInterface.OnClickListener cancelClickListener) {
+        showDialog(context, title, msg, okClickListener, cancelClickListener);
+    }
+
+    private static void showDialog(Context context, String title, String msg, DialogInterface.OnClickListener okClickListener, DialogInterface.OnClickListener cancelClickListener) {
         new AlertDialog.Builder(context)
-                .setTitle("permission_rational_title")
+                .setTitle(title)
                 .setMessage(msg)
                 .setPositiveButton(android.R.string.ok, okClickListener)
                 .setNegativeButton(android.R.string.cancel, cancelClickListener)

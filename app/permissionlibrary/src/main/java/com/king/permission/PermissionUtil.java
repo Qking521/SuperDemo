@@ -1,4 +1,4 @@
-package com.king.superdemo.utils;
+package com.king.permission;
 
 import android.Manifest;
 import android.app.Activity;

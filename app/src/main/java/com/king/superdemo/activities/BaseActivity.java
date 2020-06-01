@@ -1,27 +1,23 @@
 package com.king.superdemo.activities;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import com.king.superdemo.utils.PermissionUtil;
+import com.king.permission.PermissionActivity;
+
 
 /** 相当于一个标识,所有继承此类的Activity会自动在入口MainActivity展示
  * reference: https://blog.csdn.net/c10WTiybQ1Ye3/article/details/78098763
  * */
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends PermissionActivity {
 
 
     @Override
@@ -34,21 +30,7 @@ public class BaseActivity extends AppCompatActivity {
         setStatusBar(getActionbarBg(), false);
     }
 
-    public boolean isPermissionGranted(Context context, String permission) {
-        return PermissionUtil.isPermissionGranted(context, permission);
-    }
 
-    public void requestPermission(final Activity activity, final String[] permissions, PermissionUtil.PermissionCallback[] callbacks) {
-        PermissionUtil.setPermissionCallbacks(permissions, callbacks);
-        PermissionUtil.requestPermission(activity, permissions);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionUtil.onRequestPermissionResult(requestCode, permissions, grantResults);
-        PermissionUtil.shouldShowRequestPermissionRationale(this, permissions);
-        PermissionUtil.callback(permissions);
-    }
 
     @Override
     public void setContentView(int layoutResID) {

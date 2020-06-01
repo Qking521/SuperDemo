@@ -1,4 +1,4 @@
-package com.king.superdemo;
+package com.king.superdemo.activities;
 
 import android.app.Activity;
 import android.content.Context;

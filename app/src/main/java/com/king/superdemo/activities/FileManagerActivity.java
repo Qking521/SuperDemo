@@ -1,9 +1,7 @@
 package com.king.superdemo.activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,9 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.king.superdemo.BaseActivity;
 import com.king.superdemo.R;
 import com.king.superdemo.utils.PermissionUtil;
 
@@ -25,8 +20,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
+import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 
 public class FileManagerActivity extends BaseActivity {
@@ -50,15 +45,9 @@ public class FileManagerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_manager);
         mFileListView = (ListView)findViewById(R.id.file_listview);
-        if (isPermissionGranted(this, READ_EXTERNAL_STORAGE)) {
-            fileManager();
-        } else {
-            requestPermission(this, new String[]{READ_EXTERNAL_STORAGE},
-                    new PermissionUtil.PermissionCallback[]{x -> {
-                        Log.i("wq", "onCreate: x="+ x);
-                        if (x) fileManager();
-                    }});
-        }
+        requestPermission(this, new String[]{READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
+                new PermissionUtil.PermissionCallback[]{storage -> {  if (storage) fileManager();},
+                isContact -> Log.i("wq", "onCreate: contact="+ isContact)});
     }
 
     public void fileManager() {

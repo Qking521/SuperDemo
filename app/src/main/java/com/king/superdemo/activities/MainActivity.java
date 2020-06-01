@@ -1,4 +1,4 @@
-package com.king.superdemo;
+package com.king.superdemo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,10 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.king.superdemo.R;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {

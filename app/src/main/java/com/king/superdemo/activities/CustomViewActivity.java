@@ -1,17 +1,14 @@
 package com.king.superdemo.activities;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.king.superdemo.BaseActivity;
 import com.king.superdemo.R;
 import com.king.superdemo.service.FloatViewService;
 

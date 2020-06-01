@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.king.superdemo.BaseActivity;
 import com.king.superdemo.R;
 import com.king.superdemo.utils.LocationUtil;
 

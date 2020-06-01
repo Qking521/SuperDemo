@@ -7,12 +7,10 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.king.superdemo.BaseActivity;
 import com.king.superdemo.R;
 
 public class NotificationActivity extends BaseActivity {

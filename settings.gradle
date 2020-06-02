@@ -1,3 +1,4 @@
 rootProject.name='SuperDemo'
 include ':app'
 include ':app:permissionlibrary'
+include ':fileprovider'

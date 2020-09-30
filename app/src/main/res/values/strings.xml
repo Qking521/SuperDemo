@@ -4,4 +4,5 @@
     <string name="custom_name">Custom</string>
     <string name="file_manager_name">FileName</string>
     <string name="location_manager_name">Location</string>
+    <string name="device_info_name">deviceInfo</string>
 </resources>

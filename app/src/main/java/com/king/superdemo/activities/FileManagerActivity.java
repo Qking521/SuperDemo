@@ -43,9 +43,11 @@ public class FileManagerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_manager);
         mFileListView = (ListView)findViewById(R.id.file_listview);
-        requestPermission(this, new String[]{READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
-                new PermissionUtil.PermissionCallback[]{storage -> {  if (storage) fileManager();},
-                isContact -> Log.i("wq", "onCreate: contact="+ isContact)});
+        requestPermission(this,
+                new String[]{READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
+                new PermissionUtil.PermissionCallback[]{
+                        storage -> {  if (storage) fileManager();},
+                        isContact -> Log.i("wq", "onCreate: contact="+ isContact)});
     }
 
     public void fileManager() {

@@ -2,7 +2,7 @@
     <string name="app_name">SuperDemo</string>
     <string name="notification_name">Notification</string>
     <string name="custom_name">Custom</string>
-    <string name="file_manager_name">FileName</string>
+    <string name="file_manager_name">FileManager</string>
     <string name="location_manager_name">Location</string>
     <string name="device_info_name">deviceInfo</string>
     <string name="storage_name">Storage</string>

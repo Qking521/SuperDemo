@@ -22,10 +22,6 @@ import java.util.Map;
 
 public class PermissionUtil {
 
-    public interface PermissionCallback{
-        void permissionResult(boolean result);
-    }
-
     static Map<String, Boolean> sPermissionResultMap = new HashMap<>();
     static Map<String, PermissionCallback> sPermissionCallbackMap = new HashMap<>();
 

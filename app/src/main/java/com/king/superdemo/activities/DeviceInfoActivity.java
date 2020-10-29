@@ -16,11 +16,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.king.permission.PermissionBean;
+import com.king.permission.PermissionCallback;
 import com.king.permission.PermissionUtil;
 
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+
 import com.king.superdemo.R;
 import com.king.superdemo.utils.CommonUtil;
 
@@ -44,11 +48,9 @@ public class DeviceInfoActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.device_info);
         initUI();
-        requestPermission(this,
-                new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                new PermissionUtil.PermissionCallback[]{
-                        phoneStateGranted -> {if (phoneStateGranted) deviceInfo();},
-                        storageGranted -> {if (storageGranted) deviceInfo();}});
+        requestPermission(
+                        new PermissionBean(PermissionUtil.PERMISSION_READ_PHONE_STATE, phoneStateGranted ->  {if (phoneStateGranted) deviceInfo();}),
+                        new PermissionBean(PermissionUtil.PERMISSION_WRITE_EXTERNAL_STORAGE, storageGranted -> {if (storageGranted) deviceInfo();}));
     }
 
     private void initUI() {

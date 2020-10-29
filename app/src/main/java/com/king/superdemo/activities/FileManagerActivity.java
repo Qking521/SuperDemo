@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.king.permission.PermissionBean;
+import com.king.permission.PermissionCallback;
 import com.king.permission.PermissionUtil;
 import com.king.superdemo.R;
 
@@ -43,11 +45,9 @@ public class FileManagerActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_manager);
         mFileListView = (ListView)findViewById(R.id.file_listview);
-        requestPermission(this,
-                new String[]{READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION},
-                new PermissionUtil.PermissionCallback[]{
-                        storage -> {  if (storage) fileManager();},
-                        isContact -> Log.i("wq", "onCreate: contact="+ isContact)});
+        requestPermission(
+                new PermissionBean(PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE, storage -> {  if (storage) fileManager();}),
+                new PermissionBean(PermissionUtil.PERMISSION_ACCESS_FINE_LOCATION,  isContact -> Log.i("wq", "onCreate: contact="+ isContact)));
     }
 
     public void fileManager() {

@@ -30,7 +30,7 @@ public class FileManagerActivity extends BaseActivity {
     public static final File ROOT_FILE = Environment.getExternalStorageDirectory();
     private File mCurrentFile;
     //file manager
-    List<String> mFilePathList = new ArrayList<String>();
+    List<File> mFilePathList = new ArrayList<File>();
     List<File> mParentFileList = new ArrayList<File>();
 
     CommonRecyclerView mFileListView;
@@ -49,7 +49,7 @@ public class FileManagerActivity extends BaseActivity {
     public void fileManager() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
             File externalFile = ROOT_FILE;
-            mCommonAdapter = new CommonAdapter(mFilePathList, CommonAdapter.CONVERT_TYPE_TITLE);
+            mCommonAdapter = new CommonAdapter(this, CommonAdapter.covertToCommonHolder(mFilePathList));
             mFileListView.setAdapter(mCommonAdapter);
             mFileListView.setOnItemClickListener((parent, view, position, id) -> operateFile(mParentFileList.get(position)));
             scanFile(externalFile);
@@ -70,20 +70,20 @@ public class FileManagerActivity extends BaseActivity {
         startActivity(FileUtil.getFileIntent(this, file));
     }
 
-    private void scanFile(File parentFile) {
-        mCurrentFile = parentFile;
-        Log.v("wq", "scanFile file name =" + parentFile.getName() + " ,file path=" + parentFile.getPath());
+    private void scanFile(File file) {
+        mCurrentFile = file;
+        Log.v("wq", "scanFile file name =" + file.getName() + " ,file path=" + file.getPath());
         if (mFilePathList != null && !mFilePathList.isEmpty())
             mFilePathList.clear();
         if (mParentFileList != null && !mParentFileList.isEmpty()) {
             mParentFileList.clear();
         }
-        File[] files = parentFile.listFiles();
-        Log.i("wq", "scanFile: isDirectory="+ parentFile.isDirectory());
+        File[] files = file.listFiles();
+        Log.i("wq", "scanFile: isDirectory="+ file.isDirectory());
         if (files != null && files.length > 0) {
-            for (File file : files) {
-                mParentFileList.add(file);
-                mFilePathList.add(file.getName());
+            for (File childFile : files) {
+                mParentFileList.add(childFile);
+                mFilePathList.add(childFile);
             }
         } else {
             Log.i("wq", "scanFile: file == null");
@@ -92,7 +92,7 @@ public class FileManagerActivity extends BaseActivity {
     }
 
     private void refresh() {
-        mCommonAdapter.covertToCommonHolder(mFilePathList, 1);
+        CommonAdapter.covertToCommonHolder(mFilePathList);
         mCommonAdapter.notifyDataSetChanged();
     }
 

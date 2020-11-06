@@ -39,4 +39,6 @@ dependencies {
     implementation project(path: ':fileprovider')
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation project(path: ':recyclerviewlibrary')
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

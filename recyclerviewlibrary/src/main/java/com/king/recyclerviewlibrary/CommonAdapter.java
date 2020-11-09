@@ -24,7 +24,7 @@ import java.util.List;
 public class CommonAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     private Context mContext;
-    private static List<CommonItem> mItemList = new ArrayList<>();;
+    private List<CommonItem> mItemList = new ArrayList<>();;
     private AdapterView.OnItemClickListener itemClickListener;
     private AdapterView.OnItemLongClickListener itemLongClickListener;
 
@@ -39,15 +39,23 @@ public class CommonAdapter extends RecyclerView.Adapter<ViewHolder> {
         }
     };
 
+    public CommonAdapter(Context context) {
+        mContext = context;
+    }
+
     public CommonAdapter(Context context, List<CommonItem> itemList) {
         mContext = context;
         mItemList = itemList;
     }
 
-    public static List<CommonItem>  covertToCommonHolder(List<?> dataList) {
+    public void setCommonItemList(List<CommonItem> itemList) {
+        mItemList = itemList;
+    }
+
+    public List<CommonItem>  covertToCommonHolder(List<?> dataList) {
         mItemList.clear();
-        for (Object o : dataList) {
-            mItemList.add(Utils.getCommonItem(o));
+        for (Object object : dataList) {
+            mItemList.add(Utils.getCommonItem(mContext, object));
         }
         return mItemList;
     }
@@ -73,12 +81,20 @@ public class CommonAdapter extends RecyclerView.Adapter<ViewHolder> {
         if (holder instanceof CommonViewHolder) {
             CommonViewHolder commonViewHolder = (CommonViewHolder)holder;
             CommonItem item = mItemList.get(position);
-            setItemIcon(commonViewHolder.icon, item.file);
+            if (item.file != null) {
+                setItemIcon(commonViewHolder.icon, item.file);
+            } else {
+                commonViewHolder.icon.setImageDrawable(item.iconDrawable);
+            }
             commonViewHolder.title.setText(item.title);
             commonViewHolder.summary.setText(item.summary);
             commonViewHolder.arrow.setImageDrawable(item.arrowDrawable);
-            commonViewHolder.itemView.setOnClickListener(v -> itemClickListener.onItemClick(null, commonViewHolder.itemView, position, -1));
-            commonViewHolder.itemView.setOnLongClickListener(v -> itemLongClickListener.onItemLongClick(null, commonViewHolder.itemView, position, -1));
+            if (itemClickListener != null) {
+                commonViewHolder.itemView.setOnClickListener(v -> itemClickListener.onItemClick(null, commonViewHolder.itemView, position, -1));
+            }
+            if (itemLongClickListener != null) {
+                commonViewHolder.itemView.setOnLongClickListener(v -> itemLongClickListener.onItemLongClick(null, commonViewHolder.itemView, position, -1));
+            }
         } else if (holder instanceof EmptyViewHolder) {
             EmptyViewHolder emptyViewHolder = (EmptyViewHolder) holder;
         }

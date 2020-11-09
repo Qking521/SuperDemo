@@ -37,6 +37,8 @@
             android:label="@string/device_info_name"/>
         <activity android:name=".activities.StorageActivity"
             android:label="@string/storage_name"/>
+        <activity android:name=".activities.AppManagerActivity"
+            android:label="@string/app_manager_name"/>
 
         <service android:name=".service.FloatViewService" />
     </application>

@@ -1,5 +1,6 @@
 package com.king.recyclerviewlibrary;
 
+import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;

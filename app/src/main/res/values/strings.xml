@@ -6,4 +6,5 @@
     <string name="location_manager_name">Location</string>
     <string name="device_info_name">deviceInfo</string>
     <string name="storage_name">Storage</string>
+    <string name="app_manager_name">appManager</string>
 </resources>

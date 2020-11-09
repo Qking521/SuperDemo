@@ -7,6 +7,8 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CommonRecyclerView extends RecyclerView {
@@ -19,11 +21,21 @@ public class CommonRecyclerView extends RecyclerView {
     }
 
     public CommonRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public CommonRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        setDefaultConfig(context);
+    }
+
+    /**
+     * recyclerView的默认设置
+     * @param context
+     */
+    private void setDefaultConfig(Context context) {
+        setLayoutManager(new LinearLayoutManager(context));
+        addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
     }
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener itemClickListener) {

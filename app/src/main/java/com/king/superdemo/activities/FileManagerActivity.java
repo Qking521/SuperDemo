@@ -1,15 +1,9 @@
 package com.king.superdemo.activities;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.FileUtils;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.king.permission.PermissionBean;
 import com.king.permission.PermissionUtil;
 import com.king.recyclerviewlibrary.CommonAdapter;
+import com.king.recyclerviewlibrary.CommonItem;
 import com.king.recyclerviewlibrary.CommonRecyclerView;
 import com.king.superdemo.R;
 import com.king.superdemo.utils.FileUtil;
@@ -32,27 +27,28 @@ public class FileManagerActivity extends BaseActivity {
     //file manager
     List<File> mFilePathList = new ArrayList<File>();
     List<File> mParentFileList = new ArrayList<File>();
+    List<CommonItem> mCommonItemList = new ArrayList<>();
 
-    CommonRecyclerView mFileListView;
+    CommonRecyclerView mCommonRecyclerView;
     CommonAdapter mCommonAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_manager);
-        mFileListView = (CommonRecyclerView)findViewById(R.id.file_recyclerview);
-        mFileListView.setLayoutManager(new LinearLayoutManager(this));
+        mCommonRecyclerView = (CommonRecyclerView)findViewById(R.id.file_recyclerview);
         requestPermission(
                 new PermissionBean(PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE, storage -> {  if (storage) fileManager();}));
     }
 
     public void fileManager() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            File externalFile = ROOT_FILE;
-            mCommonAdapter = new CommonAdapter(this, CommonAdapter.covertToCommonHolder(mFilePathList));
-            mFileListView.setAdapter(mCommonAdapter);
-            mFileListView.setOnItemClickListener((parent, view, position, id) -> operateFile(mParentFileList.get(position)));
-            scanFile(externalFile);
+            File rootFile = ROOT_FILE;
+            mCommonAdapter = new CommonAdapter(this);
+            mCommonAdapter.covertToCommonHolder(mFilePathList);
+            mCommonRecyclerView.setAdapter(mCommonAdapter);
+            mCommonRecyclerView.setOnItemClickListener((parent, view, position, id) -> operateFile(mParentFileList.get(position)));
+            scanFile(rootFile);
         }else {
             Toast.makeText(this, "no external storage", Toast.LENGTH_SHORT).show();
         }
@@ -92,7 +88,7 @@ public class FileManagerActivity extends BaseActivity {
     }
 
     private void refresh() {
-        CommonAdapter.covertToCommonHolder(mFilePathList);
+        mCommonAdapter.covertToCommonHolder(mFilePathList);
         mCommonAdapter.notifyDataSetChanged();
     }
 

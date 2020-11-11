@@ -7,4 +7,5 @@
     <string name="device_info_name">deviceInfo</string>
     <string name="storage_name">Storage</string>
     <string name="app_manager_name">appManager</string>
+    <string name="kotlin_name">kotlinExercise</string>
 </resources>

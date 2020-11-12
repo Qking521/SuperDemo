@@ -27,7 +27,7 @@
         </activity>
         <activity android:name=".activities.NotificationActivity"
             android:label="@string/notification_name"/>
-        <activity android:name=".activities.CustomViewActivity"
+        <activity android:name=".activities.CustomActivity"
             android:label="@string/custom_name"/>
         <activity android:name=".activities.FileManagerActivity"
             android:label="@string/file_manager_name"/>

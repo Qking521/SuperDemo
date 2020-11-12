@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="city_picker" >
+        <item>仿iOS样式</item>
+        <item>仿京东样式</item>
+        <item>一级城市列表</item>
+        <item>三级城市列表</item>
+    </string-array>
+</resources>

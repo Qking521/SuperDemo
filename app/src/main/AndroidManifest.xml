@@ -39,8 +39,8 @@
             android:label="@string/storage_name"/>
         <activity android:name=".activities.AppManagerActivity"
             android:label="@string/app_manager_name"/>
-        <activity android:name=".activities.KotlinActivity"
-            android:label="@string/kotlin_name"/>
+        <activity android:name=".activities.LoginActivity"
+            android:label="@string/login_name"/>
 
         <service android:name=".service.FloatViewService" />
     </application>

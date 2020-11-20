@@ -33,7 +33,7 @@ import com.lljjcoder.style.citythreelist.ProvinceActivity
  */
 class CityPickerFragment : Fragment() {
     private var mContext: Context? = null
-    private var cityPickerTextView: TextView? = null
+    private var cityPickerResultText: TextView? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
@@ -47,7 +47,7 @@ class CityPickerFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val linearLayout = inflater.inflate(R.layout.city_picker_fragment, container, false) as LinearLayout
-        cityPickerTextView = linearLayout.findViewById(R.id.city_picker_text_view)
+        cityPickerResultText = linearLayout.findViewById(R.id.city_picker_text_view)
         val styles = resources.getStringArray(R.array.city_picker)
         val styleSize = styles.size
         for (i in 0 until styleSize) {
@@ -69,7 +69,7 @@ class CityPickerFragment : Fragment() {
                 val bundle = data.extras
                 val cityInfoBean = bundle!!.getParcelable<Parcelable>("cityinfo") as CityInfoBean?
                         ?: return
-                cityPickerTextView!!.text = "城市： $cityInfoBean"
+                cityPickerResultText!!.text = "城市： $cityInfoBean"
             }
         }
         if (requestCode == ProvinceActivity.RESULT_DATA) {
@@ -83,7 +83,7 @@ class CityPickerFragment : Fragment() {
                 val city: CityBean = data.getParcelableExtra("city")
                 //区域结果
                 val area: CityBean = data.getParcelableExtra("area")
-                cityPickerTextView!!.text = province.name + city.name + area.name
+                cityPickerResultText!!.text = province.name + city.name + area.name
             }
         }
     }
@@ -115,7 +115,7 @@ class CityPickerFragment : Fragment() {
         cityPicker.setConfig(jdCityConfig)
         cityPicker.setOnCityItemClickListener(object : OnCityItemClickListener() {
             override fun onSelected(province: ProvinceBean, city: com.lljjcoder.bean.CityBean, district: DistrictBean) {
-                cityPickerTextView!!.text = """
+                cityPickerResultText!!.text = """
                     城市选择结果：
                     ${province.name}(${province.id})
                     ${city.name}(${city.id})
@@ -138,7 +138,7 @@ class CityPickerFragment : Fragment() {
                 Log.i("wq", "onSelected: province$province")
                 Log.i("wq", "onSelected: city$city")
                 Log.i("wq", "onSelected: district$district")
-                cityPickerTextView!!.text = """
+                cityPickerResultText!!.text = """
                     ${province.name}
                     ${city.name}
                     ${district.name}

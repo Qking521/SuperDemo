@@ -12,50 +12,70 @@
         android:id="@+id/custom_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_bright"
+        android:background="@android:color/black"
         android:orientation="vertical" />
 
-    <Button
-        android:id="@+id/city_picker_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="showCityPicker"
-        android:text="city picker" />
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/target1"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="setVisible"
-            android:text="目标1" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/target2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="setVisible"
-            android:text="目标2" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/city_picker_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showCityPicker"
+                android:text="city picker" />
 
-    <com.king.superdemo.custom.DividerView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorAccent"
-        app:follow="target1|target2" />
+            <Button
+                android:id="@+id/time_picker_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="showTimePicker"
+                android:text="time picker" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:gravity="center"
-        android:onClick="floatView"
-        android:tag="start"
-        android:text="floatView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/target1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="setVisible"
+                    android:text="目标1" />
+
+                <Button
+                    android:id="@+id/target2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="setVisible"
+                    android:text="目标2" />
+            </LinearLayout>
+
+            <com.king.superdemo.custom.DividerView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent"
+                app:follow="target1|target2" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center"
+                android:onClick="floatView"
+                android:tag="start"
+                android:text="floatView" />
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </LinearLayout>

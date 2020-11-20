@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.king.superdemo.R
 import com.king.superdemo.fragments.CityPickerFragment
+import com.king.superdemo.fragments.TimePickerFragment
 import com.king.superdemo.service.FloatViewService
 
 /**
@@ -47,6 +48,13 @@ class CustomActivity : BaseActivity() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val cityPickerFragment = CityPickerFragment()
         fragmentTransaction.replace(R.id.custom_fragment, cityPickerFragment)
+        fragmentTransaction.commit()
+    }
+
+    fun showTimePicker(view: View) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction();
+        val timePickerFragment = TimePickerFragment()
+        fragmentTransaction.replace(R.id.custom_fragment, timePickerFragment)
         fragmentTransaction.commit()
     }
 }

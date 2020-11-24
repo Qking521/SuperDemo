@@ -17,7 +17,7 @@ class AppLeftFragment : BaseFragment() {
     }
 
     private var mListView: ListView? = null
-    private var callBack: CallBack? = null
+    private lateinit var callBack: (Int) -> Unit;
     override fun onAttach(context: Context) {
         super.onAttach(context)
     }
@@ -34,10 +34,10 @@ class AppLeftFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         mListView = view.findViewById(R.id.app_left_fragment_lv)
         mListView!!.setAdapter(ArrayAdapter(view.context, android.R.layout.simple_list_item_1, datas))
-        mListView!!.setOnItemClickListener(OnItemClickListener { parent: AdapterView<*>?, view1: View?, position: Int, id: Long -> callBack!!.onItemClick(position) })
+        mListView!!.setOnItemClickListener{ parent: AdapterView<*>?, view1: View?, position: Int, id: Long -> callBack!!.invoke(position) }
     }
 
-    fun setOnItemClickListener(callBack: CallBack) {
+    fun setOnItemClickListener(callBack: (Int) -> Unit) {
         this.callBack = callBack
     }
 

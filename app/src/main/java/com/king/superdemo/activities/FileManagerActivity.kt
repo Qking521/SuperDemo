@@ -21,18 +21,15 @@ import java.util.*
 class FileManagerActivity : BaseActivity() {
     private var mCurrentFile: File? = null
 
-    //file manager
     var mFilePathList: MutableList<File?>? = ArrayList()
     var mParentFileList: MutableList<File>? = ArrayList()
-    var mCommonItemList: List<CommonItem> = ArrayList()
     var mCommonRecyclerView: CommonRecyclerView? = null
     var mCommonAdapter: CommonAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_manager)
         mCommonRecyclerView = findViewById<View>(R.id.file_recyclerview) as CommonRecyclerView
-        requestPermission(
-                PermissionBean(PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE, PermissionCallback { storage: Boolean -> if (storage) fileManager() }))
+        requestPermission(PermissionBean(PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE, PermissionCallback { if (it) fileManager() }))
     }
 
     fun fileManager() {
@@ -41,7 +38,7 @@ class FileManagerActivity : BaseActivity() {
             mCommonAdapter = CommonAdapter(this)
             mCommonAdapter!!.covertToCommonHolder(mFilePathList)
             mCommonRecyclerView!!.adapter = mCommonAdapter
-            mCommonRecyclerView!!.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long -> operateFile(mParentFileList!![position]) }
+            mCommonRecyclerView!!.setOnItemClickListener { _, _, position: Int, _ -> operateFile(mParentFileList!![position]) }
             scanFile(rootFile)
         } else {
             Toast.makeText(this, "no external storage", Toast.LENGTH_SHORT).show()

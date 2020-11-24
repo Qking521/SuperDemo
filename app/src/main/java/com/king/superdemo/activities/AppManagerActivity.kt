@@ -15,11 +15,7 @@ class AppManagerActivity : BaseActivity() {
         setContentView(R.layout.app_manager_layout)
         leftFragment = supportFragmentManager.findFragmentById(R.id.app_left_fragment) as AppLeftFragment?
         rightFragment = supportFragmentManager.findFragmentById(R.id.app_right_fragment) as AppRightFragment?
-        leftFragment!!.setOnItemClickListener(object : CallBack {
-            override fun onItemClick(position: Int) {
-                update(position)
-            }
-        })
+        leftFragment!!.setOnItemClickListener {position : Int -> update(position) }
     }
 
     private fun update(position: Int) {

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,9 @@ import com.king.recyclerviewlibrary.CommonAdapter
 import com.king.recyclerviewlibrary.CommonItem
 import com.king.recyclerviewlibrary.CommonRecyclerView
 import com.king.superdemo.R
+import kotlinx.coroutines.*
 import java.util.stream.Collectors
+import kotlin.coroutines.CoroutineContext
 
 class AppRightFragment : BaseFragment() {
     private var mRecyclerView: CommonRecyclerView? = null
@@ -57,8 +60,12 @@ class AppRightFragment : BaseFragment() {
         mRecyclerView = view.findViewById(R.id.app_right_fragment_recycler_view)
         mRecyclerView!!.setLayoutManager(LinearLayoutManager(view.context))
         mCommonAdapter = CommonAdapter(view.context)
-        mCommonAdapter!!.setCommonItemList(allApps)
-        mRecyclerView!!.setAdapter(mCommonAdapter)
+        //使用协程获取数据,否则再UI线程中获取数据会阻塞UI线程,当数据量较大时,会有明显的卡顿
+        GlobalScope.launch {
+            mCommonAdapter!!.setCommonItemList(allApps)
+            //使用withContext切换到主线程更新UI
+            withContext(Dispatchers.Main) {mRecyclerView!!.setAdapter(mCommonAdapter)}
+        }
     }
 
     //获取所有应用
@@ -75,7 +82,7 @@ class AppRightFragment : BaseFragment() {
             val packageManager = mContext!!.packageManager
             val packageInfoList = packageManager.getInstalledPackages(0)
                     .stream()
-                    .filter { packageInfo: PackageInfo -> packageInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == ApplicationInfo.FLAG_SYSTEM }
+                    .filter { it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == ApplicationInfo.FLAG_SYSTEM }
                     .collect(Collectors.toList())
             return mCommonAdapter!!.covertToCommonHolder(packageInfoList)
         }

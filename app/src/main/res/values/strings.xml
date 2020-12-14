@@ -8,4 +8,5 @@
     <string name="storage_name">Storage</string>
     <string name="app_manager_name">appManager</string>
     <string name="login_name">login index</string>
+    <string name="biometric_name">Biometric</string>
 </resources>

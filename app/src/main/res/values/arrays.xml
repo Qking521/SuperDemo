@@ -10,4 +10,11 @@
         <item>时间选择器</item>
         <item>条件选择器</item>
     </string-array>
+
+    <string-array name="app_left_fragment" >
+        <item>已安装的所有应用</item>
+        <item>已安装的系统应用</item>
+        <item>已安装的三方应用</item>
+        <item>桌面上的所有应用</item>
+    </string-array>
 </resources>

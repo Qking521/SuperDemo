@@ -12,9 +12,17 @@ import android.widget.ListView
 import com.king.superdemo.R
 
 class AppLeftFragment : BaseFragment() {
+
+    //和AppManagerActivity通信
     interface CallBack {
         fun onItemClick(position: Int)
     }
+
+    private val datas: Array<String>
+        get() {
+            val  array = context?.resources?.getStringArray(R.array.app_left_fragment) as Array<String>
+            return array
+        }
 
     private var mListView: ListView? = null
     private lateinit var callBack: (Int) -> Unit;
@@ -41,7 +49,4 @@ class AppLeftFragment : BaseFragment() {
         this.callBack = callBack
     }
 
-    companion object {
-        var datas = arrayOf("已安装所有应用", "已安装系统应用", "桌面上的所有应用")
-    }
 }

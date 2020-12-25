@@ -3,7 +3,6 @@ package com.king.superdemo.fragments
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,11 +15,10 @@ import com.king.recyclerviewlibrary.CommonRecyclerView
 import com.king.superdemo.R
 import kotlinx.coroutines.*
 import java.util.stream.Collectors
-import kotlin.coroutines.CoroutineContext
 
 class AppRightFragment : BaseFragment() {
-    private var mRecyclerView: CommonRecyclerView? = null
-    private var mCommonAdapter: CommonAdapter? = null
+    private lateinit var mRecyclerView: CommonRecyclerView
+    private lateinit var mCommonAdapter: CommonAdapter
     private var mContext: Context? = null
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -34,20 +32,27 @@ class AppRightFragment : BaseFragment() {
     override fun setArguments(args: Bundle?) {
         super.setArguments(args)
         val bundle = arguments
-        if (bundle != null) {
-            val position = bundle.getInt("position")
-            val itemList = getItemList(position)
-            mCommonAdapter!!.setCommonItemList(itemList)
-            mCommonAdapter!!.notifyDataSetChanged()
+        bundle?.let {
+            val position = it.getInt("position")
+            refreshList(position)
         }
     }
 
-    private fun getItemList(position: Int): List<CommonItem>? {
-        return when (position) {
-            0 -> allApps
-            1 -> systemApps
-            2 -> launcherApps
-            else -> null
+    private fun refreshList(position: Int){
+        //使用协程获取数据,否则再UI线程中获取数据会阻塞UI线程,当数据量较大时,会有明显的卡顿
+        GlobalScope.launch {
+            Log.i("wq", "onViewCreated: GlobalScope id="+ Thread.currentThread().name);
+            val list = when (position) {
+                0 -> allApps
+                1 -> systemApps
+                2 -> thirdApps
+                3 -> launcherApps
+                else -> null
+            }
+            //使用withContext切换到主线程更新UI
+            withContext(Dispatchers.Main) {
+                mCommonAdapter .setCommonItemList(list)
+                mCommonAdapter.notifyDataSetChanged()}
         }
     }
 
@@ -58,14 +63,10 @@ class AppRightFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mRecyclerView = view.findViewById(R.id.app_right_fragment_recycler_view)
-        mRecyclerView!!.setLayoutManager(LinearLayoutManager(view.context))
+        mRecyclerView.setLayoutManager(LinearLayoutManager(view.context))
         mCommonAdapter = CommonAdapter(view.context)
-        //使用协程获取数据,否则再UI线程中获取数据会阻塞UI线程,当数据量较大时,会有明显的卡顿
-        GlobalScope.launch {
-            mCommonAdapter!!.setCommonItemList(allApps)
-            //使用withContext切换到主线程更新UI
-            withContext(Dispatchers.Main) {mRecyclerView!!.setAdapter(mCommonAdapter)}
-        }
+        mRecyclerView.adapter = mCommonAdapter
+        refreshList(0)
     }
 
     //获取所有应用
@@ -73,7 +74,7 @@ class AppRightFragment : BaseFragment() {
         private get() {
             val packageManager = mContext!!.packageManager
             val packageInfoList = packageManager.getInstalledPackages(0)
-            return mCommonAdapter!!.covertToCommonHolder(packageInfoList)
+            return mCommonAdapter.covertToCommonHolder(packageInfoList)
         }
 
     //获取系统应用
@@ -84,7 +85,18 @@ class AppRightFragment : BaseFragment() {
                     .stream()
                     .filter { it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM == ApplicationInfo.FLAG_SYSTEM }
                     .collect(Collectors.toList())
-            return mCommonAdapter!!.covertToCommonHolder(packageInfoList)
+            return mCommonAdapter.covertToCommonHolder(packageInfoList)
+        }
+
+    //获取第三方应用
+    private val thirdApps: List<CommonItem>
+        private get() {
+            val packageManager = mContext!!.packageManager
+            val packageInfoList = packageManager.getInstalledPackages(0)
+                    .stream()
+                    .filter { it.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != ApplicationInfo.FLAG_SYSTEM }
+                    .collect(Collectors.toList())
+            return mCommonAdapter.covertToCommonHolder(packageInfoList)
         }
 
     //获取桌面上的应用
@@ -95,6 +107,6 @@ class AppRightFragment : BaseFragment() {
             intent.addCategory(Intent.CATEGORY_LAUNCHER)
             intent.action = Intent.ACTION_MAIN
             val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
-            return mCommonAdapter!!.covertToCommonHolder(resolveInfoList)
+            return mCommonAdapter.covertToCommonHolder(resolveInfoList)
         }
 }

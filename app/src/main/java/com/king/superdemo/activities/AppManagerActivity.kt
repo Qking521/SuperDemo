@@ -8,13 +8,15 @@ import com.king.superdemo.fragments.AppLeftFragment.CallBack
 import com.king.superdemo.fragments.AppRightFragment
 
 class AppManagerActivity : BaseActivity() {
-    var leftFragment: AppLeftFragment? = null
-    var rightFragment: AppRightFragment? = null
+
+    lateinit var leftFragment: AppLeftFragment
+    lateinit var rightFragment: AppRightFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.app_manager_layout)
-        leftFragment = supportFragmentManager.findFragmentById(R.id.app_left_fragment) as AppLeftFragment?
-        rightFragment = supportFragmentManager.findFragmentById(R.id.app_right_fragment) as AppRightFragment?
+        leftFragment = supportFragmentManager.findFragmentById(R.id.app_left_fragment) as AppLeftFragment
+        rightFragment = supportFragmentManager.findFragmentById(R.id.app_right_fragment) as AppRightFragment
         leftFragment!!.setOnItemClickListener {position : Int -> update(position) }
     }
 

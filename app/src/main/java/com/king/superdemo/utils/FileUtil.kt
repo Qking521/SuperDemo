@@ -11,7 +11,7 @@ import com.king.superdemo.gson.GsonUtil
 import java.io.File
 
 object FileUtil {
-    fun getVideoThumbnail(filePath: String?): Bitmap {
+    fun getVideoThumbnail(filePath: String?): Bitmap? {
         val retriever = MediaMetadataRetriever()
         retriever.setDataSource(filePath)
         return retriever.frameAtTime

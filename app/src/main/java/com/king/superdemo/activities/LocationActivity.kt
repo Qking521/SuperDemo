@@ -59,7 +59,11 @@ class LocationActivity : BaseActivity() {
     fun gpsLocate(v: View?) {
         if (LocationUtil.isGpsLocationEnabled(this)) {
             if (mProviders!!.contains(LocationManager.GPS_PROVIDER)) {
-                mLocationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, myLocationListener)
+                myLocationListener?.let {
+                    mLocationManager!!.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f,
+                        it
+                    )
+                }
             }
         } else {
             openSettings()
@@ -70,7 +74,11 @@ class LocationActivity : BaseActivity() {
     fun networkLocate(v: View?) {
         if (LocationUtil.isNetworkLocationEnabled(this)) {
             if (mProviders!!.contains(LocationManager.NETWORK_PROVIDER)) {
-                mLocationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f, myLocationListener)
+                myLocationListener?.let {
+                    mLocationManager!!.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0f,
+                        it
+                    )
+                }
             }
         }
     }
@@ -85,7 +93,7 @@ class LocationActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mLocationManager!!.removeUpdates(myLocationListener)
+        myLocationListener?.let { mLocationManager!!.removeUpdates(it) }
     }
 
     internal inner class MyLocationListener : LocationListener {

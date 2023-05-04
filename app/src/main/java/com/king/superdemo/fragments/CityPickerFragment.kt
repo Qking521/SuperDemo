@@ -1,5 +1,6 @@
 package com.king.superdemo.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -59,6 +60,7 @@ class CityPickerFragment : Fragment() {
         return linearLayout
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CityListSelectActivity.CITY_SELECT_RESULT_FRAG) {
@@ -78,12 +80,12 @@ class CityPickerFragment : Fragment() {
                     return
                 }
                 //省份结果
-                val province: CityBean = data.getParcelableExtra("province")
+                val province: CityBean? = data.getParcelableExtra("province")
                 //城市结果
-                val city: CityBean = data.getParcelableExtra("city")
+                val city: CityBean? = data.getParcelableExtra("city")
                 //区域结果
-                val area: CityBean = data.getParcelableExtra("area")
-                cityPickerResultText!!.text = province.name + city.name + area.name
+                val area: CityBean? = data.getParcelableExtra("area")
+                cityPickerResultText!!.text = province!!.name + city!!.name + area!!.name
             }
         }
     }

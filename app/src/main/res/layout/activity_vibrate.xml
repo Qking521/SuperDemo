@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="vibrateLegacyDefault"
+        android:text="vibrate Legacy Default"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="vibrateLegacyMode"
+        android:text="vibrate Legacy Mode"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="vibrateDefaultAmplitude"
+        android:text="vibrate Default Amplitude"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="vibrateEffectTick"
+        android:text="vibrate Effect Tick"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="vibrateEffectClick"
+        android:text="vibrate Effect Click"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="vibrateEffectDoubleClick"
+        android:text="vibrate Effect DoubleClick"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="vibrateEffectHeavyClick"
+        android:text="vibrate Effect HeavyClick"/>
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.view.KeyEvent
+import android.view.Menu
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -30,6 +31,11 @@ class FileManagerActivity : BaseActivity() {
         setContentView(R.layout.activity_file_manager)
         mCommonRecyclerView = findViewById<View>(R.id.file_recyclerview) as CommonRecyclerView
         requestPermission(PermissionBean(PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE, PermissionCallback { if (it) fileManager() }))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.file_manager_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     fun fileManager() {

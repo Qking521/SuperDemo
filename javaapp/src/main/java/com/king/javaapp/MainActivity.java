@@ -21,10 +21,33 @@ import com.king.javaapp.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.IOException;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import dagger.Lazy;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+
+    @Inject
+    public Lazy<Car> lazyCar;
+
+    @OkHttpNoParam
+    @Inject
+    OkHttpClient okHttpClient;
+
+    @OkHttpNoParam
+    @Inject
+    OkHttpClient okHttpClientb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +69,27 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+//        DaggerMainComponet.builder().okHttpModule(new OkHttpModule()).build();
+        DaggerMainComponet.create().inject(this);
+        lazyCar.get().printCarBrand();
+        lazyCar.get().printEnginName();
+        Request request = new Request.Builder().url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2Fd5adb87d-3465-47a7-94c4-ad8a20d353b8%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1688887386&t=048503f0328552859e77387155ef3fa3").build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.v("wq", "onFailure: e="+ e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                Log.v("wq", "onResponse: response.body().string()");
+            }
+        });
+        Log.v("wq", "onCreate: a="+ okHttpClient);
+        Log.v("wq", "onCreate: a="+ okHttpClientb);
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.view.View
 import android.widget.Toast
+import com.imuxuan.floatingview.FloatingView
 import com.king.superdemo.R
 import com.king.superdemo.fragments.CityPickerFragment
 import com.king.superdemo.fragments.TimePickerFragment
@@ -28,12 +29,25 @@ class CustomActivity : BaseActivity() {
             val tag = view.tag as String
             if (tag == "start") {
                 startService(Intent(this, FloatViewService::class.java))
+                FloatingView.get().add();
                 view.tag = "stop"
             } else {
                 stopService(Intent(this, FloatViewService::class.java))
                 view.tag = "start"
+                FloatingView.get().remove();
             }
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FloatingView.get().attach(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        FloatingView.get().detach(this)
     }
 
     fun setVisible(view: View) {

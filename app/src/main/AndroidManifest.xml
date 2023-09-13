@@ -49,6 +49,8 @@
             android:label="@string/biometric_name"/>
         <activity android:name=".activities.VibrateActivity"
             android:label="@string/vibrator_name"/>
+        <activity android:name=".activities.PreferenceActivity"
+            android:label="@string/preference_name"/>
 
         <service android:name=".service.FloatViewService" />
         <service android:name=".service.DumpService"/>

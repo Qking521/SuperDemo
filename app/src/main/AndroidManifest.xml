@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.king.superdemo">
 
+<!--    <permission android:name="com.king.permission.aa"/>-->
+    <uses-permission android:name="com.king.permission.bb"/>
+
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,6 +15,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="com.tmobile.permission.RECEIVE_SW_START"/>
 
     <application
         android:allowBackup="true"
@@ -51,6 +55,8 @@
             android:label="@string/vibrator_name"/>
         <activity android:name=".activities.PreferenceActivity"
             android:label="@string/preference_name"/>
+        <activity android:name=".activities.JetpackActivity"
+            android:label="@string/jetpack_name"/>
 
         <service android:name=".service.FloatViewService" />
         <service android:name=".service.DumpService"/>

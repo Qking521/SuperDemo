@@ -11,4 +11,5 @@
     <string name="biometric_name">Biometric</string>
     <string name="vibrator_name">Vibrator</string>
     <string name="preference_name">Preference</string>
+    <string name="jetpack_name">JetPack</string>
 </resources>

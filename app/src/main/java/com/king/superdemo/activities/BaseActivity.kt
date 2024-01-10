@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import com.king.permission.PermissionActivity
+import androidx.appcompat.app.AppCompatActivity
 
 /** 相当于一个标识,所有继承此类的Activity会自动在入口MainActivity展示
  * reference: https://blog.csdn.net/c10WTiybQ1Ye3/article/details/78098763
  */
-open class BaseActivity : PermissionActivity() {
+open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val decorView = window.decorView

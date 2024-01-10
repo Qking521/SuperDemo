@@ -1,4 +1,4 @@
-package com.king.superdemo.gson
+package com.king.superdemo.utils
 
 import android.content.Context
 import com.google.gson.Gson

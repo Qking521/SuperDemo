@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.Range
 import androidx.appcompat.widget.AppCompatEditText;
-import com.king.superdemo.kotlin.toast
+import com.king.superdemo.utils.toast
 import java.util.regex.Pattern
 
 

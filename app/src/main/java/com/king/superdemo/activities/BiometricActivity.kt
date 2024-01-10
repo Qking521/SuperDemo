@@ -10,12 +10,9 @@ import android.os.Bundle
 import android.os.CancellationSignal
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import androidx.annotation.RequiresApi
 import com.king.superdemo.R
-import android.content.pm.PackageManager
-import android.widget.Toast
-import com.king.superdemo.kotlin.toast
+import com.king.superdemo.utils.toast
 
 class BiometricActivity : BaseActivity() {
 

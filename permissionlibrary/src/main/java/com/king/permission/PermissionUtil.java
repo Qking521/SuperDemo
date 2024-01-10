@@ -13,6 +13,8 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -141,7 +143,23 @@ public class PermissionUtil {
         activity.startActivity(i);
     }
 
-    public static void requestPermission(final Activity activity, final String[] permissions) {
+    public static void requestPermission(final Activity activity, PermissionBean... permissionBean) {
+        int size = permissionBean.length;
+        String[] requestPermissions = new String[size];
+        PermissionCallback[] permissionCallbacks = new PermissionCallback[size];
+        for (int i = 0; i < size; i++) {
+            requestPermissions[i] = permissionBean[i].requestPermission;
+            permissionCallbacks[i] = permissionBean[i].permissionCallback;
+        }
+        requestPermission(activity, requestPermissions, permissionCallbacks);
+    }
+
+    public static void requestPermission(final Activity activity, final String[] permissions, PermissionCallback[] callbacks) {
+        setPermissionCallbacks(permissions, callbacks);
+        requestPermission(activity, permissions);
+    }
+
+    static void requestPermission(final Activity activity, final String[] permissions) {
         activity.requestPermissions(permissions, getRequestCode(permissions));
     }
 
@@ -223,5 +241,6 @@ public class PermissionUtil {
             }
         }
     }
+
 }
 

@@ -19,6 +19,7 @@ import com.king.permission.PermissionCallback
 import com.king.permission.PermissionUtil
 import com.king.superdemo.R
 import com.king.superdemo.utils.CommonUtil
+import com.king.superdemo.utils.requestPermission
 import java.lang.reflect.InvocationTargetException
 
 class DeviceInfoActivity : BaseActivity() {
@@ -27,7 +28,7 @@ class DeviceInfoActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.device_info)
         initUI()
-        requestPermission(
+        requestPermission(this,
                 PermissionBean(PermissionUtil.PERMISSION_READ_PHONE_STATE, PermissionCallback { phoneStateGranted: Boolean -> if (phoneStateGranted) deviceInfo() }),
                 PermissionBean(PermissionUtil.PERMISSION_WRITE_EXTERNAL_STORAGE, PermissionCallback { storageGranted: Boolean -> if (storageGranted) deviceInfo() }))
     }

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.king.superdemo">
-
-<!--    <permission android:name="com.king.permission.aa"/>-->
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
-    <uses-permission android:name="com.king.permission.bb"/>
-
+    package="com.king.superdemo"
+    tools:node="merge">
+    <!-- <permission android:name="com.king.permission.aa"/> -->
+    <uses-permission android:name="com.king.permission.bb" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,25 +13,28 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="com.tmobile.permission.RECEIVE_SW_START"/>
-    <uses-permission android:name="android.permission.INSTALL_PACKAGES"
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.tmobile.permission.RECEIVE_SW_START" />
+    <uses-permission
+        android:name="android.permission.INSTALL_PACKAGES"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.DELETE_PACKAGES"
+    <uses-permission
+        android:name="android.permission.DELETE_PACKAGES"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
-        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="${label}"
+        tools:replace="android:label"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity"
+        <activity
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,33 +42,45 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.NotificationActivity"
-            android:label="@string/notification_name"/>
-        <activity android:name=".activities.CustomActivity"
-            android:label="@string/custom_name"/>
-        <activity android:name=".activities.FileManagerActivity"
-            android:label="@string/file_manager_name"/>
-        <activity android:name=".activities.LocationActivity"
-            android:label="@string/location_manager_name"/>
-        <activity android:name=".activities.DeviceInfoActivity"
-            android:label="@string/device_info_name"/>
-        <activity android:name=".activities.StorageActivity"
-            android:label="@string/storage_name"/>
-        <activity android:name=".activities.AppManagerActivity"
-            android:label="@string/app_manager_name"/>
-        <activity android:name=".activities.LoginActivity"
-            android:label="@string/login_name"/>
-        <activity android:name=".activities.BiometricActivity"
-            android:label="@string/biometric_name"/>
-        <activity android:name=".activities.VibrateActivity"
-            android:label="@string/vibrator_name"/>
-        <activity android:name=".activities.PreferenceActivity"
-            android:label="@string/preference_name"/>
-        <activity android:name=".activities.JetpackActivity"
-            android:label="@string/jetpack_name"/>
+        <activity
+            android:name=".activities.NotificationActivity"
+            android:label="@string/notification_name" />
+        <activity
+            android:name=".activities.CustomActivity"
+            android:label="@string/custom_name" />
+        <activity
+            android:name=".activities.FileManagerActivity"
+            android:label="@string/file_manager_name" />
+        <activity
+            android:name=".activities.LocationActivity"
+            android:label="@string/location_manager_name" />
+        <activity
+            android:name=".activities.DeviceInfoActivity"
+            android:label="@string/device_info_name" />
+        <activity
+            android:name=".activities.StorageActivity"
+            android:label="@string/storage_name" />
+        <activity
+            android:name=".activities.AppManagerActivity"
+            android:label="@string/app_manager_name" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/login_name" />
+        <activity
+            android:name=".activities.BiometricActivity"
+            android:label="@string/biometric_name" />
+        <activity
+            android:name=".activities.VibrateActivity"
+            android:label="@string/vibrator_name" />
+        <activity
+            android:name=".activities.PreferenceActivity"
+            android:label="@string/preference_name" />
+        <activity
+            android:name=".activities.JetpackActivity"
+            android:label="@string/jetpack_name" />
 
         <service android:name=".service.FloatViewService" />
-        <service android:name=".service.DumpService"/>
+        <service android:name=".service.DumpService" />
     </application>
 
 </manifest>

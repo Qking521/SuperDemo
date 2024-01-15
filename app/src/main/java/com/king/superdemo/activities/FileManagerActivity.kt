@@ -11,12 +11,11 @@ import android.widget.Toast
 import com.king.permission.PermissionBean
 import com.king.permission.PermissionCallback
 import com.king.permission.PermissionUtil
-import com.king.permission.PermissionUtil.requestPermission
 import com.king.recyclerviewlibrary.CommonAdapter
-import com.king.recyclerviewlibrary.CommonItem
 import com.king.recyclerviewlibrary.CommonRecyclerView
 import com.king.superdemo.R
 import com.king.superdemo.utils.FileUtil
+import com.king.superdemo.utils.requestPermission
 import java.io.File
 import java.util.*
 
@@ -31,7 +30,7 @@ class FileManagerActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_file_manager)
         mCommonRecyclerView = findViewById<View>(R.id.file_recyclerview) as CommonRecyclerView
-        requestPermission(this, PermissionBean(PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE, PermissionCallback { if (it) fileManager() }))
+        requestPermission(PermissionBean(PermissionUtil.PERMISSION_READ_EXTERNAL_STORAGE, PermissionCallback { if (it) fileManager() }))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

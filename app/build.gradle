@@ -16,7 +16,11 @@ android {
     }
 
     signingConfigs {
-        release {
+        S98317  {
+            storeFile file('D:\\projects\\SuperDemo\\sign\\platform_317.jks')
+            storePassword '123456'
+            keyAlias 'platform'
+            keyPassword '123456'
         }
 
     }
@@ -31,6 +35,23 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    flavorDimensions 'sign'
+    productFlavors {
+        S98317 {
+            manifestPlaceholders label: 'S98317'
+            dimension 'sign'
+            signingConfig signingConfigs.S98317
+
+        }
+        S98215 {
+            dimension 'sign'
+            manifestPlaceholders label: 'S98215'
+        }
+        Common {
+            dimension 'sign'
+            manifestPlaceholders label: '@string/app_name'
+        }
+    }
 
 }
 
@@ -40,6 +61,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.android.material:material:1.5.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

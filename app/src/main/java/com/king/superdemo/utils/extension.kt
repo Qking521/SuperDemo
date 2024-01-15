@@ -13,6 +13,6 @@ import com.king.permission.PermissionUtil
 fun View.toast(msg: String) = Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
 
 fun Activity.toast(msg: String, length: Int = Toast.LENGTH_SHORT) = Toast.makeText(this, msg, length).show()
-fun Activity.requestPermission(activity: Activity, vararg permissionBeans: PermissionBean) = PermissionUtil.requestPermission(this, *permissionBeans)
+fun Activity.requestPermission(vararg permissionBeans: PermissionBean) = PermissionUtil.requestPermission(this, *permissionBeans)
 
 fun logThread(tag: String) = Log.v("tag", "logThread: name="+ Thread.currentThread().name)

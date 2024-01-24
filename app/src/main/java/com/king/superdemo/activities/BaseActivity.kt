@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceScreen
 
 /** 相当于一个标识,所有继承此类的Activity会自动在入口MainActivity展示
  * reference: https://blog.csdn.net/c10WTiybQ1Ye3/article/details/78098763
@@ -19,6 +21,7 @@ open class BaseActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION) // content布局占据全屏,但是导航栏会显示在界面上层
         decorView.systemUiVisibility = decorView.systemUiVisibility or uiOption
         setStatusBar(actionbarBg, false)
+
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -50,14 +53,14 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    //获取ActionBar的背景色
     private val actionbarBg: Int
         private get() {
             val actionbarAttr = intArrayOf(R.attr.background)
             val typedValue = TypedValue()
             theme.resolveAttribute(R.attr.actionBarStyle, typedValue, true)
             val ta = theme.obtainStyledAttributes(typedValue.resourceId, actionbarAttr)
-            val backaground: Int
-            backaground = try {
+            val backaground = try {
                 ta.getColor(0, Color.RED)
             } catch (e: Exception) {
                 Color.RED

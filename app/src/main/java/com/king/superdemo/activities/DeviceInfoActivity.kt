@@ -14,6 +14,9 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import com.hjq.permissions.OnPermissionCallback
+import com.hjq.permissions.Permission
+import com.hjq.permissions.XXPermissions
 import com.king.permission.PermissionBean
 import com.king.permission.PermissionCallback
 import com.king.permission.PermissionUtil
@@ -28,9 +31,19 @@ class DeviceInfoActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.device_info)
         initUI()
-        requestPermission(
-                PermissionBean(PermissionUtil.PERMISSION_READ_PHONE_STATE, PermissionCallback { phoneStateGranted: Boolean -> if (phoneStateGranted) deviceInfo() }),
-                PermissionBean(PermissionUtil.PERMISSION_WRITE_EXTERNAL_STORAGE, PermissionCallback { storageGranted: Boolean -> if (storageGranted) deviceInfo() }))
+        XXPermissions.with(this).permission(Permission.RECORD_AUDIO).request(object : OnPermissionCallback{
+            override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDenied(permissions: MutableList<String>, doNotAskAgain: Boolean) {
+                super.onDenied(permissions, doNotAskAgain)
+            }
+        })
+        XXPermissions.with(this).permission(Permission.READ_PHONE_STATE).request { permissions, allGranted ->  }
+//        requestPermission(
+//                PermissionBean(PermissionUtil.PERMISSION_READ_PHONE_STATE, PermissionCallback { phoneStateGranted: Boolean -> if (phoneStateGranted) deviceInfo() }),
+//                PermissionBean(PermissionUtil.PERMISSION_WRITE_EXTERNAL_STORAGE, PermissionCallback { storageGranted: Boolean -> if (storageGranted) deviceInfo() }))
     }
 
     private fun initUI() {

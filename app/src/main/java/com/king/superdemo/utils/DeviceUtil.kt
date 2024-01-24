@@ -6,7 +6,6 @@ import android.os.Build
 import android.provider.Settings
 import android.telephony.TelephonyManager
 import android.util.Log
-import com.king.superdemo.BuildConfig
 import java.net.NetworkInterface
 
 object DeviceUtil {
@@ -22,10 +21,10 @@ object DeviceUtil {
             deviceId = getMacAddress()
             sp.edit().run { putString(deviceKey, deviceId) }.apply()
         }
-        //todo 临时调试，发布之前删除
-        if(BuildConfig.DEBUG){
-            deviceId="a0fb831afabb";
-        }
+//        //todo 临时调试，发布之前删除
+//        if(BuildConfig.DEBUG){
+//            deviceId="a0fb831afabb";
+//        }
         return deviceId
     }
 

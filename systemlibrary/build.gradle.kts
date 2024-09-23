@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 30
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -30,10 +30,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    resourcePrefix = "system_" // 避免资源冲突
 }
 
 dependencies {
 
+    compileOnly(files("libs/framework.jar"))
     implementation("androidx.core:core-ktx:1.12.0")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation("androidx.appcompat:appcompat:1.7.0")

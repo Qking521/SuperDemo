@@ -14,8 +14,8 @@ import com.king.permission.PermissionUtil
 import com.king.recyclerviewlibrary.CommonAdapter
 import com.king.recyclerviewlibrary.CommonRecyclerView
 import com.king.superdemo.R
+import com.king.superdemo.extension.requestPermission
 import com.king.superdemo.utils.FileUtil
-import com.king.superdemo.utils.requestPermission
 import java.io.File
 import java.util.*
 

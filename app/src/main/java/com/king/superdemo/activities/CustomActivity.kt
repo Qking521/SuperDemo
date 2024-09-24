@@ -11,6 +11,7 @@ import com.king.superdemo.R
 import com.king.superdemo.fragments.CityPickerFragment
 import com.king.superdemo.fragments.TimePickerFragment
 import com.king.superdemo.service.FloatViewService
+import com.king.systemlibrary.SystemMainActivity
 
 /**
  * 展示自定义View和显示第三方控件的Activity
@@ -70,5 +71,11 @@ class CustomActivity : BaseActivity() {
         val timePickerFragment = TimePickerFragment()
         fragmentTransaction.replace(R.id.custom_fragment, timePickerFragment)
         fragmentTransaction.commit()
+    }
+
+    fun systemInterface(view: View) {
+        val intent = Intent(this, SystemMainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

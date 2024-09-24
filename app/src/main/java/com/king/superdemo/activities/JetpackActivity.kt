@@ -37,6 +37,8 @@ class JetpackActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         Log.v("wq", "logThread1: nam")
 
+
+
         PackageUtil.install(this,"storage/emulated/0/QuickpicGallery.apk")
 
 

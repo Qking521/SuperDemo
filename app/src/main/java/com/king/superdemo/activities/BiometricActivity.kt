@@ -12,7 +12,7 @@ import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import com.king.superdemo.R
-import com.king.superdemo.utils.toast
+import com.king.superdemo.extension.toast
 
 class BiometricActivity : BaseActivity() {
 

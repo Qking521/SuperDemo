@@ -12,7 +12,6 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.king.superdemo.R
 import java.util.*
-import java.util.stream.Collectors
 
 class MainActivity : AppCompatActivity() {
     var mListView: ListView? = null

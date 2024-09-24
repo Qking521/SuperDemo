@@ -17,12 +17,8 @@ import android.widget.TextView
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
-import com.king.permission.PermissionBean
-import com.king.permission.PermissionCallback
-import com.king.permission.PermissionUtil
 import com.king.superdemo.R
 import com.king.superdemo.utils.CommonUtil
-import com.king.superdemo.utils.requestPermission
 import java.lang.reflect.InvocationTargetException
 
 class DeviceInfoActivity : BaseActivity() {

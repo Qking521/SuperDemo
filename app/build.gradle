@@ -16,7 +16,6 @@ android {
     }
 
 
-
     signingConfigs {
         debug {
             storeFile file(project.getProperty("debugKeystoreFile_ca"))
@@ -44,6 +43,9 @@ android {
         jvmToolchain(8)
     }
 
+    buildFeatures {
+        aidl true
+    }
 }
 
 dependencies {

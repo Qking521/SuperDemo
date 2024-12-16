@@ -19,6 +19,7 @@ import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.king.superdemo.R
 import com.king.superdemo.utils.CommonUtil
+import com.king.superdemo.utils.ViewUtil
 import java.lang.reflect.InvocationTargetException
 
 class DeviceInfoActivity : BaseActivity() {
@@ -163,7 +164,7 @@ class DeviceInfoActivity : BaseActivity() {
                 .append("height: ").append(dm.heightPixels).append(ENTER)
                 .append("scale: ").append(dm.scaledDensity).append(ENTER)
                 .append("density: ").append(dm.density).append(ENTER)
-                .append("statusBarHeight: ").append(CommonUtil.getStatusBarHeight(this)).append(ENTER)
+                .append("statusBarHeight: ").append(ViewUtil.getStatusBarHeight(this)).append(ENTER)
     }
 
     companion object {

@@ -83,6 +83,10 @@
             android:name=".activities.JetpackActivity"
             android:label="@string/jetpack_name" />
 
+        <activity
+            android:name=".activities.RetrofitActivity"
+            android:label="@string/retrofit_name" />
+
         <service android:name=".service.FloatViewService" />
         <service android:name=".service.DumpService" />
     </application>

@@ -12,4 +12,5 @@
     <string name="vibrator_name">Vibrator</string>
     <string name="preference_name">Preference</string>
     <string name="jetpack_name">JetPack</string>
+    <string name="retrofit_name">Retrofit</string>
 </resources>

@@ -9,9 +9,13 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.lifecycle.ViewModelProvider
 import com.king.superdemo.R
+import com.king.superdemo.activities.AppManagerActivity
 
 class AppLeftFragment : BaseFragment() {
+
+    private lateinit var sharedViewModel: AppManagerActivity.AppSharedViewModel
 
     //和AppManagerActivity通信
     interface CallBack {
@@ -32,6 +36,7 @@ class AppLeftFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(AppManagerActivity.AppSharedViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,11 +47,14 @@ class AppLeftFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         mListView = view.findViewById(R.id.app_left_fragment_lv)
         mListView.setAdapter(ArrayAdapter(view.context, android.R.layout.simple_list_item_1, datas))
-        mListView.setOnItemClickListener{ parent: AdapterView<*>?, view1: View?, position: Int, id: Long -> callBack.invoke(position) }
+        mListView.setOnItemClickListener{ parent: AdapterView<*>?, view1: View?, position: Int, id: Long ->
+            callBack.invoke(position)
+            sharedViewModel.updateData("position" to position)}
     }
 
     fun setOnItemClickListener(callBack: (Int) -> Unit) {
         this.callBack = callBack
+
     }
 
 }

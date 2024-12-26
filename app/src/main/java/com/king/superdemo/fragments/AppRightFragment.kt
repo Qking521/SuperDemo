@@ -8,11 +8,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.king.recyclerviewlibrary.CommonAdapter
 import com.king.recyclerviewlibrary.CommonItem
 import com.king.recyclerviewlibrary.CommonRecyclerView
 import com.king.superdemo.R
+import com.king.superdemo.activities.AppManagerActivity
 import kotlinx.coroutines.*
 import java.util.stream.Collectors
 
@@ -20,6 +23,8 @@ class AppRightFragment : BaseFragment() {
     private lateinit var mRecyclerView: CommonRecyclerView
     private lateinit var mCommonAdapter: CommonAdapter
     private var mContext: Context? = null
+
+    private lateinit var sharedViewModel: AppManagerActivity.AppSharedViewModel
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
@@ -27,6 +32,11 @@ class AppRightFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(AppManagerActivity.AppSharedViewModel::class.java)
+        sharedViewModel.data.observe(this){
+            val position = it.second
+            refreshList(position)
+        }
     }
 
     override fun setArguments(args: Bundle?) {
